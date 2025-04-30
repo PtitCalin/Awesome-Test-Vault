@@ -1,0 +1,76 @@
+System
+    📊 Dashboards
+        Homepage.md
+        Vault Map.md
+        Curriculum.md
+        Dashboards/
+        Dashboard Index.md
+        Personal Dashboard.md
+        Project Dashboard.md
+        Learning Dashboard.md
+    📄 Templates
+        Templates.md
+        New Brain Dump Template.md  
+        New Event Template.md
+        General Note Template.md
+        New Meeting Note Template.md
+        New Goal Template.md
+        New Person Template.md
+        New Project Template.md
+        Reflection Template.md
+        Task Template.md
+        Recurring Task Template.md
+        New Quest Template.md
+        New Lesson Template.md
+    🧠 Meta
+        Vault Philosophy.md
+        Naming Conventions.md
+            File Naming Conventions.md
+            Folder Naming Conventions.md
+        Tags Glossary.md
+        Metadata Standards.md
+            YAML Metadata Standards.md
+            Tags Metadata Standards.md
+            Links Metadata Standards.md
+    📓 Logs
+        Vault Setup Log.md
+        Vault Maintenance Log.md
+        Vault Backup Log.md
+        Dev Journal.md
+        Vault Change Log.md
+        Content Roadmap.md
+        Automation Log.md
+        Plugin Log.md
+        Plugin Development Log.md
+    🤖 Automations
+        Automation Index.md
+        Script Registry.md
+        Cron Schedule.md
+        Automation Documentation.md
+        Automation Testing.md
+    🧩 Plugins
+        Enabled Plugins.md
+        Plugin Configuration Notes.md
+        Plugin Wish List.md
+        Plugin Development.md
+        Plugin API.md
+        Plugin Testing.md
+        Plugin Documentation.md
+        Plugin Compatibility.md
+    🛠️ Backend
+        Obsidian Settings.md
+        GitHub Sync.md
+        Data Models.md 
+        Folder Structure Schema.md
+        Vault Export Settings.md
+    🎨 Frontend
+        UI Themes.md
+        Canvas Maps.md
+        Custom Icons.md
+        Iconography.md
+        Color Schemes.md
+        Typography.md
+        Custom CSS.md
+        Custom Views.md
+        UX Design Principles.md
+        User Experience Testing.md 
