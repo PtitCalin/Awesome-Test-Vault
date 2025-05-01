@@ -125,6 +125,3 @@ If you do, feel free to give credit or link back – or don’t. The knowledge w
 - **CC-BY-4.0** — for original content, templates, and documentation
 
 © 2025 PtiCalin 💛. Built with kindness, caffeine  and and a lifelong curiosity for systems. 
-
-
-Thanks and have a nice day :D
