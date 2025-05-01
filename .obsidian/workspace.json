@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Learnings/01 Setup/01 Setup.md",
+                "file": "Notes/Daily Notes/journaling-block/journaling-block.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01 Setup"
+              "title": "journaling-block"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Learnings/01 Setup/01 Setup.md",
+                "file": "Notes/Daily Notes/journaling-block/journaling-block.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 01 Setup"
+              "title": "Backlinks for journaling-block"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Learnings/01 Setup/01 Setup.md",
+                "file": "Notes/Daily Notes/journaling-block/journaling-block.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 01 Setup"
+              "title": "Outgoing links from journaling-block"
             }
           },
           {
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Learnings/01 Setup/01 Setup.md",
+                "file": "Notes/Daily Notes/journaling-block/journaling-block.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of 01 Setup"
+              "title": "Outline of journaling-block"
             }
           }
         ]
@@ -168,8 +168,13 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "75cbba21a196a498",
+  "active": "cfdc0630d0326727",
   "lastOpenFiles": [
+    "README.md",
+    "Notes/Daily Notes/daily-plan/daily-plan.md",
+    "Notes/Calendar/Calendar.md",
+    "Notes/Areas/Areas.md",
+    "Learnings/01 Setup/01 Setup.md",
     "System/Templates/Obsidian/template_note-encyclopedia.md",
     "System/Backend/Folder Structure Schema/Structure Builder Scripts/System Section/structure-builder_System.bash",
     "System/Backend/Folder Structure Schema/Structure Builder Scripts/System Section/Structure_System",
@@ -200,11 +205,6 @@
     "System/Backend/Folder Structure Schema/Structure Builder Scripts/Learnings Section/README_structure-builder_Learnings.md",
     "System/Backend/Folder Structure Schema/Structure Builder Scripts/Files and Media Section/README_structure-builder_Files-And-Media.md",
     "System/Backend/Folder Structure Schema/Folder Structure Schema.md",
-    "Learnings/01 Setup/01 - Welcome to the Vault.md",
-    "Learnings/01 Setup/01 Setup.md",
-    "Learnings/00 Learning Management/Skill Tree.md",
-    "Learnings/00 Learning Management/Quest Log.md",
-    "Learnings/00 Learning Management/Progress Tracker.md",
-    "Learnings/00 Learning Management/Dashboards.md"
+    "Learnings/01 Setup/01 - Welcome to the Vault.md"
   ]
 }
