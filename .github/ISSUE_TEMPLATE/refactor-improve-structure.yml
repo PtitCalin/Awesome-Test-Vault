@@ -1,0 +1,26 @@
+name: 🛠️ Refactor / Improve Structure
+description: Propose a reorganization, renaming, or structural update.
+title: 'Refactor: {Area or Item}'
+labels:
+- refactor
+- structure improvement
+body:
+- type: textarea
+  id: current-structure
+  attributes:
+    label: Current Structure
+    description: What does the structure look like right now?
+  validations:
+    required: true
+- type: textarea
+  id: proposed-change
+  attributes:
+    label: Proposed Change
+    description: Describe the improvements you propose.
+  validations:
+    required: true
+- type: textarea
+  id: reasons
+  attributes:
+    label: Why change this?
+    description: Why would this make the vault better?

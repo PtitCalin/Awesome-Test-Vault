@@ -1,0 +1,24 @@
+name: 🎯 Goal Planning
+description: Plan a focused vault goal.
+title: 'Goal: {Objective}'
+labels:
+- goal
+- planning
+body:
+- type: textarea
+  id: goal
+  attributes:
+    label: What's the goal?
+    description: Describe the objective.
+  validations:
+    required: true
+- type: textarea
+  id: steps
+  attributes:
+    label: Steps to achieve it
+    description: List the key steps.
+- type: textarea
+  id: timeline
+  attributes:
+    label: Ideal timeline
+    description: Is there a deadline or priority?

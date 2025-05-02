@@ -1,0 +1,21 @@
+blank_issues_enabled: false
+contact_links: []
+issue_templates:
+- name: ✍️ New Content Entry
+  url: /PtitCalin/Awesome-Test-Vault/issues/new?template=new-content-entry.yml
+- name: 🛠️ Refactor / Improve Structure
+  url: /PtitCalin/Awesome-Test-Vault/issues/new?template=refactor-improve-structure.yml
+- name: 🪲 Bug Report (Vault Related)
+  url: /PtitCalin/Awesome-Test-Vault/issues/new?template=bug-report.yml
+- name: 🌟 Feature Request
+  url: /PtitCalin/Awesome-Test-Vault/issues/new?template=feature-request.yml
+- name: 🧹 Vault Cleanup
+  url: /PtitCalin/Awesome-Test-Vault/issues/new?template=vault-cleanup.yml
+- name: 🧪 Experiment / Test Log
+  url: /PtitCalin/Awesome-Test-Vault/issues/new?template=experiment-test-log.yml
+- name: 🧭 Documentation Task
+  url: /PtitCalin/Awesome-Test-Vault/issues/new?template=documentation-task.yml
+- name: 🎯 Goal Planning
+  url: /PtitCalin/Awesome-Test-Vault/issues/new?template=goal-planning.yml
+- name: 💡 Idea / Brainstorm
+  url: /PtitCalin/Awesome-Test-Vault/issues/new?template=idea-brainstorm.yml

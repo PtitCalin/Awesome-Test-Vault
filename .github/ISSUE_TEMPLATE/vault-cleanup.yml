@@ -1,0 +1,19 @@
+name: 🧹 Vault Cleanup
+description: 'Schedule a cleaning session: archiving, deleting, merging.'
+title: 'Cleanup: {Scope}'
+labels:
+- cleanup
+- maintenance
+body:
+- type: textarea
+  id: scope
+  attributes:
+    label: What needs cleaning?
+    description: Describe the folder, section, or item that needs maintenance.
+  validations:
+    required: true
+- type: textarea
+  id: method
+  attributes:
+    label: How to proceed?
+    description: Plan for archiving, deleting, merging, or reorganizing.

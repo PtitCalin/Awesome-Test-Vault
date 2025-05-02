@@ -1,0 +1,24 @@
+name: 🌟 Feature Request
+description: Suggest a new template, tool, workflow, or system for the vault.
+title: 'Feature: {Idea}'
+labels:
+- feature request
+- enhancement
+body:
+- type: textarea
+  id: feature
+  attributes:
+    label: What is the feature?
+    description: Describe the new idea.
+  validations:
+    required: true
+- type: textarea
+  id: benefit
+  attributes:
+    label: Why would it be useful?
+    description: Explain why this would improve the vault.
+- type: textarea
+  id: notes
+  attributes:
+    label: Optional sketches or examples
+    description: Any mockups, files, or examples.

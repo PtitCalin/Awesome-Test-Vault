@@ -1,0 +1,19 @@
+name: 💡 Idea / Brainstorm
+description: Capture a new idea.
+title: 'Idea: {Short Summary}'
+labels:
+- idea
+- brainstorm
+body:
+- type: textarea
+  id: idea
+  attributes:
+    label: What's the idea?
+    description: Let it flow!
+  validations:
+    required: true
+- type: textarea
+  id: notes
+  attributes:
+    label: Wild thoughts or variations
+    description: Alternative angles or crazy versions.

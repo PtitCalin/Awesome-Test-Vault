@@ -1,0 +1,26 @@
+name: 🧪 Experiment / Test Log
+description: Document a trial run of a new workflow, plugin, or idea.
+title: 'Experiment: {Title}'
+labels:
+- experiment
+- test
+body:
+- type: textarea
+  id: experiment
+  attributes:
+    label: What did you test?
+    description: Summarize the experiment or new setup.
+  validations:
+    required: true
+- type: textarea
+  id: results
+  attributes:
+    label: What happened?
+    description: Describe the results.
+  validations:
+    required: true
+- type: textarea
+  id: future
+  attributes:
+    label: Future steps?
+    description: Will you adopt it, improve it, or abandon it?

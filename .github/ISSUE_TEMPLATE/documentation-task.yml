@@ -1,0 +1,19 @@
+name: 🧭 Documentation Task
+description: Improve the README, wiki, or vault documentation.
+title: 'Docs: {Area}'
+labels:
+- documentation
+- task
+body:
+- type: textarea
+  id: what-docs
+  attributes:
+    label: What part of the documentation?
+    description: Specify which file, page, or guide.
+  validations:
+    required: true
+- type: textarea
+  id: improvement
+  attributes:
+    label: How should it improve?
+    description: Suggest what to add, fix, or clarify.

@@ -1,0 +1,26 @@
+name: ✍️ New Content Entry
+description: Log a new page, template, or section added to the vault.
+title: 'New: {Page or Template Name}'
+labels:
+- new content
+- vault growth
+body:
+- type: textarea
+  id: description
+  attributes:
+    label: What did you create?
+    description: Describe the new content.
+  validations:
+    required: true
+- type: input
+  id: location
+  attributes:
+    label: Where is it located?
+    description: Folder/path inside the vault.
+  validations:
+    required: true
+- type: textarea
+  id: notes
+  attributes:
+    label: Future plans or linking ideas
+    description: Any notes or next steps?

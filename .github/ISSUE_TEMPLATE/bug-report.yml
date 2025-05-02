@@ -1,0 +1,31 @@
+name: 🪲 Bug Report (Vault Related)
+description: Report a bug or glitch inside the vault.
+title: 'Bug: {Issue Summary}'
+labels:
+- bug
+- investigation needed
+body:
+- type: textarea
+  id: what-happened
+  attributes:
+    label: What happened?
+    description: Clearly describe the issue.
+  validations:
+    required: true
+- type: textarea
+  id: where
+  attributes:
+    label: Where?
+    description: Page name, plugin, or workflow where the bug occurred.
+  validations:
+    required: true
+- type: textarea
+  id: steps
+  attributes:
+    label: Steps to Reproduce
+    description: Step-by-step instructions to reproduce the issue.
+- type: textarea
+  id: suggestion
+  attributes:
+    label: Any thoughts on fixing it?
+    description: Optional ideas or clues.
