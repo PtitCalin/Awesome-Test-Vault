@@ -1,0 +1,11 @@
+App Name: Ben’s Folder Watcher
+Watch Path: C:\Users\benny\Dropbox\Family Room\À FAIRE\02-À Jouer\BEN
+Subfolder Pattern: [Folder Name] (animation)
+Default Mode: Dry Run = ON
+Tray Menu:
+☑ Show Status
+☑ Toggle Dry Run
+☑ Pause/Resume
+☑ Quit
+Log File: Central ➔ BenFolderWatcher_Log.txt
+Packaging: .exe (no Python needed for the end user)
