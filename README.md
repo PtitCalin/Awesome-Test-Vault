@@ -33,7 +33,7 @@ Notes/
 
 Learnings/
     00 Setup/
-    01 GitHub/
+    01 File Management and Terminal/
     ...
     
 Files and Media/
@@ -124,4 +124,4 @@ If you do, feel free to give credit or link back – or don’t. The knowledge w
 - **MIT License** — for code and scripts
 - **CC-BY-4.0** — for original content, templates, and documentation
 
-© 2025 PtiCalin 💛. Built with kindness, caffeine  and and a lifelong curiosity for systems. 
+© 2025 PtiCalin 💛. Built with kindness, caffeine and a lifelong curiosity for systems. 
