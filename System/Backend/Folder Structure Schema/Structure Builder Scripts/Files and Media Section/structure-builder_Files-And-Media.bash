@@ -66,6 +66,8 @@ if $DRY_RUN; then
 else
   echo "✅ Files and Media structure created successfully at: $MEDIA_ROOT"
 fi
+  echo "Yay!"
+# -----------------------------------------------------------------------------------
 # === End of Script ===
 # -----------------------------------------------------------------------------------
 # This script is designed to create a structured directory for managing files and media
