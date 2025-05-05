@@ -52,7 +52,7 @@ Where have you seen it in the world?
 🔄 Connections to Other Topics
 Related to: [[Related Topic A]], [[Related Topic B]]
 
-Appears in: [[Quests]], [[Projects]], [[Learnings]]
+Appears in: [[🎯 Quests]], [[Projects]], [[Learnings]]
 
 ---
 ### Questions (Question block)
