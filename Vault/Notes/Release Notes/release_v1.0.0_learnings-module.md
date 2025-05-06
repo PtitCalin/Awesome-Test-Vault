@@ -1,3 +1,4 @@
+#release
 # 🎮 Awesome Test Vault — Learning System v1.0 Release Notes
 
 **Release Date:** May 2025
@@ -63,6 +64,6 @@ Planned for future updates:
 
 This release marks the first stages in my endeavours of creating **living learning RPG**.  
 It reflects months of strategic design, gamification theory, and creative development.  
-The quest has officially begun. 🗺✨
+LEt the games begin. 🗺✨
 
 
