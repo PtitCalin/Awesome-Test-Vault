@@ -4,11 +4,11 @@
 # 🎨 MidJourney Inspo Batch Folder Builder - Ruby Version
 # -----------------------------------------------------------------------------------
 # USAGE:
-#   ruby mj_inspo_builder.rb --batch 5 --start 7                  # Normal mode
-#   ruby mj_inspo_builder.rb --batch 5 --start 7 --dry-run        # Preview only, no changes
+#   ruby builder_mj-inspo-description.rb --batch 5 --start 7                  # Normal mode
+#   ruby builder_mj-inspo-description.rb --batch 5 --start 7 --dry-run        # Preview only, no changes
 #
 # EXAMPLE:
-#   ruby mj_inspo_builder.rb --batch 3 --start 42
+#   ruby builder_mj-inspo-description.rb --batch 3 --start 42
 # -----------------------------------------------------------------------------------
 
 require 'fileutils'

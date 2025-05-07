@@ -4,11 +4,11 @@
 # 🎨 MidJourney Inspo Batch Folder Builder - Python Version
 # -----------------------------------------------------------------------------------
 # USAGE:
-#   python mj_inspo_builder.py --batch 5 --start 7                # Normal mode
-#   python mj_inspo_builder.py --batch 5 --start 7 --dry-run      # Preview only, no changes
+#   python builder_mj-inspo-description.py --batch 5 --start 7                # Normal mode
+#   python builder_mj-inspo-description.py --batch 5 --start 7 --dry-run      # Preview only, no changes
 #
 # EXAMPLE:
-#   python mj_inspo_builder.py --batch 3 --start 42
+#   python builder_mj-inspo-description.py --batch 3 --start 42
 # -----------------------------------------------------------------------------------
 
 import os

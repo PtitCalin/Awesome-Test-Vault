@@ -4,7 +4,7 @@
 // 🎨 MidJourney Inspo Batch Folder Builder (Node.js Version)
 // -----------------------------------------------------------------------------------
 // USAGE:
-//   node mj-inspo-builder.js --batch 3 --start 42 [--dry-run]
+//   node builder_mj-inspo-description.js --batch 3 --start 42 [--dry-run]
 // -----------------------------------------------------------------------------------
 
 const fs = require('fs');

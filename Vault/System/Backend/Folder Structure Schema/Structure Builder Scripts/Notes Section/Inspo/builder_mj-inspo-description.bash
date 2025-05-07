@@ -4,9 +4,9 @@
 # 🎨 MidJourney Inspo Batch Folder Builder
 # -----------------------------------------------------------------------------------
 # USAGE:
-#   ./structure-builder_mj-inspo-description.bash --batch <number> --start <start_n> [--dry-run]
+#   ./builder_mj-inspo-description.bash --batch <number> --start <start_n> [--dry-run]
 # EXAMPLE:
-#   ./structure-builder_mj-inspo-description.bash --batch 5 --start 7
+#   ./builder_mj-inspo-description.bash --batch 5 --start 7
 # -----------------------------------------------------------------------------------
 
 # === Configuration ===

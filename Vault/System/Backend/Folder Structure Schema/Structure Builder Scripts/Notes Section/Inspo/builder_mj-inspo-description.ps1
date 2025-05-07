@@ -3,10 +3,10 @@
 🎨 MidJourney Inspo Batch Folder Builder - PowerShell Version
 -----------------------------------------------------------------------------------
 USAGE:
-    .\mj-inspo-builder.ps1 -Batch 5 -Start 7 [-DryRun]
+    .\builder_mj-inspo-description.ps1 -Batch 5 -Start 7 [-DryRun]
 
 EXAMPLE:
-    .\mj-inspo-builder.ps1 -Batch 3 -Start 42
+    .\builder_mj-inspo-description.ps1 -Batch 3 -Start 42
 -----------------------------------------------------------------------------------
 #>
 
