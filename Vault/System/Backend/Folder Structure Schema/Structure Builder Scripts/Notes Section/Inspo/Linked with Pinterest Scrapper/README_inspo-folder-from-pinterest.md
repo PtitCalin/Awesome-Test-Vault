@@ -53,6 +53,12 @@ The 🖼 Image Description.md will include:
 
 **Obsidian Image Link (clickable link):**
 [View Image](Files and Media/Images/Inspo/image_filename.jpg)
+
+
+# Description of the image:
+
+
+
 ```
 ## ⚙️ Usage
 1. **Install Required Libraries**: Ensure you have the required libraries installed. You can do this using pip:
@@ -72,7 +78,22 @@ The 🖼 Image Description.md will include:
 | --dry-run | Preview actions without making any changes.                                         |
 
 ## 🔄 Integration
-This script is designed to be called automatically by the Pinterest Scraper v6.5 after each image download.
+This script is designed to be called automatically by the Pinterest Scraper v1.0 after each image download.
+
+[ Pinterest Board ]
+    ↓
+[ Scraper ]
+    ↓
+[ Downloads image → Files and Media > Images > Inspo ]
+    ↓
+[ Calls Folder Builder ]
+    ↓
+[ Creates Notes > Inspiration > inspo_nnnn folder ]
+    ↓
+[ Links image + Pinterest URL in Obsidian-friendly format ]
+    ↓
+[ Logs everything ]
+
 
 It can also be run manually to add additional inspo folders for existing images.
 
@@ -93,10 +114,12 @@ All actions are logged to:
 | Dry run support                  | ✅      |
 | CLI and callable as a module     | ✅      |
 
+
 ## 🔎 Version History
 | Version | Date       | Notes                                                                                                    |
 | ------- | ---------- | -------------------------------------------------------------------------------------------------------- |
 | v1.0    | 2024-05-07 | First full release with self-instructive code, Obsidian link support, and Pinterest Scraper integration. |
+
 
 ## ⚠️ Disclaimer
 This script is provided for personal and educational use. Use responsibly.

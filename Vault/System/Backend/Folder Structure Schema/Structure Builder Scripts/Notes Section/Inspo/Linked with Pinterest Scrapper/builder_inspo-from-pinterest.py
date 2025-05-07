@@ -1,176 +1,267 @@
 #!/usr/bin/env python3
 
 # -----------------------------------------------------------------------------------
-# 📂 MidJourney Inspo Folder Builder v1.0
+# 🖼 Pinterest Board Scraper v6.5 — Final Edition
 # -----------------------------------------------------------------------------------
 # SCRIPT NAME:
-#   builder_inspo-from-pinterest.py
+#   pinterest-inspo-scraper.py
 #
 # PURPOSE:
-#   Creates an inspo folder for a Pinterest image following the new structure:
+#   Scrape images from a Pinterest board, save them to the Inspo image folder,
+#   and automatically create organized inspo folders and note files
+#   using the MidJourney Inspo Folder Builder.
 #
-#   • Image stays in: Files and Media > Images > Inspo
-#   • Notes folder created in: Notes > Inspiration > inspo_nnnn
-#   • Notes folder contains:
-#       - ✨ Analysis and Interpretation.md
-#       - 🏛️ Curatorial Description.md
-#       - 🖼 Image Description.md (with reference to the image & Pinterest URL)
-#       - MidJourney Variations/var1-4/var_description.md
+# INTEGRATION:
+#   Calls builder_inspo-from-pinterest.py after each image download to:
+#   - Assign an inspo_nnnn folder.
+#   - Create standard markdown note files.
+#   - Add Obsidian-compatible links to the image.
 #
-# HOW THIS SCRIPT IS USED:
-#   This script is called automatically by the Pinterest scraper after each image download.
-#   It can also be used manually for organizing additional inspo images.
-#
-# ARGUMENTS:
-#   --image : The filename of the image (must already be in the Inspo image folder)
-#   --title : Optional title for the inspo (defaults to "Untitled")
-#   --url   : Optional Pinterest URL for reference
-#   --dry-run : If set, no changes will be made (for preview/testing)
+# HOW TO USE:
+#   1. Set BOARD_URL and other settings in the CONFIGURATION section.
+#   2. Run: python pinterest-inspo-scraper.py
 #
 # -----------------------------------------------------------------------------------
 
+# --- IMPORTS ---
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.edge.service import Service as EdgeService
+
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
+
+from selenium.webdriver.common.by import By
+import time
+import requests
 import os
-import re
+import random
 from datetime import datetime
+from tqdm import tqdm
+import re
+
+# --- IMPORT Folder Builder ---
+from builder_inspo-from-pinterest import create_inspo_folder
 
 # -----------------------------------------------------------------------------------
-# === USER CONFIGURATION ===
+# === CONFIGURATION ===
 # -----------------------------------------------------------------------------------
 
-# Where to create the inspo notes folders:
-BASE_PATH_NOTES = r"C:\Users\charl\OneDrive\Projets\Awesome Test\System\Awesome-Test-Vault\VAULT\Notes\Inspiration"
+BOARD_URL = 'YOUR_BOARD_URL_HERE'  # 👈 Replace with your Pinterest board URL
 
-# Where the images are stored:
-BASE_PATH_IMAGES = r"C:\Users\charl\OneDrive\Projets\Awesome Test\System\Awesome-Test-Vault\VAULT\Files and Media\Images\Inspo"
+SCROLL_PAUSE_TIME = 5
+MAX_SCROLLS = 50
+DOWNLOAD_PAUSE_TIME_RANGE = (2, 6)
+DRY_RUN = True
+MAX_RETRIES = 3
 
-# Where to write the logs:
-LOG_PATH = r"C:\Users\charl\OneDrive\Projets\Awesome Test\System\Awesome-Test-Vault\VAULT\System\Backend\Logs\Inspo File Scrape and Organization Log\inspo_organizer.log"
+# Browser choice:
+# 'chrome' | 'firefox' | 'edge' | 'auto'
+BROWSER = 'auto'
 
-# Notes files to create:
-INSPO_FILES = [
-    "✨ Analysis and Interpretation.md",
-    "🏛️ Curatorial Description.md",
-    "🖼 Image Description.md"
-]
+# Where to save downloaded images:
+IMAGE_FOLDER = r"C:\Users\charl\OneDrive\Projets\Awesome Test\System\Awesome-Test-Vault\VAULT\Files and Media\Images\Inspo"
 
-# Variations folder name:
-VARIATIONS_FOLDER = "MidJourney Variations"
+# Log file:
+LOG_FILE = r"C:\Users\charl\OneDrive\Projets\Awesome Test\System\Awesome-Test-Vault\VAULT\System\Backend\Logs\Inspo File Scrape and Organization Log\scraper_log.txt"
 
 # -----------------------------------------------------------------------------------
-# === CORE FUNCTION ===
+# === UTILITIES ===
 # -----------------------------------------------------------------------------------
 
-def create_inspo_folder(image_filename, title="Untitled", pinterest_url="N/A", dry_run=False):
-    """
-    Creates a new inspo folder in the Notes > Inspiration structure.
-    Links to the provided image (must be in the BASE_PATH_IMAGES folder).
+def sanitize_filename(text):
+    """Sanitize filenames for OS compatibility."""
+    text = re.sub(r'[\\/*?:"<>|]', "", text)
+    text = re.sub(r'\s+', '_', text.strip())
+    return text[:100]
 
-    Returns the inspo folder name (e.g., inspo_0001).
-    """
+def launch_browser(browser_choice):
+    """Launch browser based on user choice or auto-detect."""
+    print(f"🧭 Browser selected: {browser_choice}")
 
-    # 1️⃣ Auto-detect next inspo number:
-    existing = [d for d in os.listdir(BASE_PATH_NOTES) if re.match(r"inspo_\d{4}", d)]
-    existing_numbers = [
-        int(re.findall(r"inspo_(\d{4})", name)[0]) for name in existing
-    ] if existing else []
+    if browser_choice == 'chrome':
+        try:
+            print("🧠 Trying Chrome...")
+            return webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+        except Exception as e:
+            print(f"❌ Chrome failed: {e}")
+            raise
 
-    next_number = max(existing_numbers) + 1 if existing_numbers else 1
-    folder_name = f"inspo_{next_number:04d}"
-    full_path = os.path.join(BASE_PATH_NOTES, folder_name)
+    elif browser_choice == 'firefox':
+        try:
+            print("🧠 Trying Firefox...")
+            return webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
+        except Exception as e:
+            print(f"❌ Firefox failed: {e}")
+            raise
 
-    print(f"➡ Creating inspo folder: {folder_name}")
-    print(f"   📍 Notes folder path: {full_path}")
-    print(f"   📷 Image filename: {image_filename}")
+    elif browser_choice == 'edge':
+        try:
+            print("🧠 Trying Edge...")
+            return webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
+        except Exception as e:
+            print(f"❌ Edge failed: {e}")
+            raise
 
-    # 2️⃣ Create base folder:
-    if dry_run:
-        print(f"[DRY RUN] Would create folder: {full_path}")
+    elif browser_choice == 'auto':
+        for attempt_browser in ['chrome', 'firefox', 'edge']:
+            try:
+                print(f"🔎 Auto-trying {attempt_browser.capitalize()}...")
+                return launch_browser(attempt_browser)
+            except Exception:
+                print(f"❌ {attempt_browser.capitalize()} not available. Trying next...")
+        print("💀 No supported browsers found.")
+        exit(1)
+
     else:
-        os.makedirs(full_path, exist_ok=True)
-        print(f"📂 Created folder: {full_path}")
+        raise ValueError("Unsupported browser choice.")
 
-    # 3️⃣ Create the core markdown files:
-    for filename in INSPO_FILES:
-        filepath = os.path.join(full_path, filename)
-        if dry_run:
-            print(f"[DRY RUN] Would create file: {filepath}")
-        else:
-            with open(filepath, "a") as f:
-                if filename == "🖼 Image Description.md":
-                    # Add image reference + Pinterest URL + Obsidian smart links:
-                    image_reference = (
-                        f"**Inspiration Image:** {image_filename}\n"
-                        f"**Pinterest URL:** {pinterest_url}\n\n"
-                        f"**Obsidian Image Link (embedded preview):**\n"
-                        f"![[Files and Media/Images/Inspo/{image_filename}]]\n\n"
-                        f"**Obsidian Image Link (clickable link):**\n"
-                        f"[View Image](Files and Media/Images/Inspo/{image_filename})\n"
-                    )
-                    f.write(image_reference)
-            print(f"📝 Created file: {filepath}")
+# -----------------------------------------------------------------------------------
+# === STARTUP SUMMARY ===
+# -----------------------------------------------------------------------------------
 
-    # 4️⃣ Create the MidJourney Variations structure:
-    variations_base = os.path.join(full_path, VARIATIONS_FOLDER)
-    for v in range(1, 5):
-        var_name = f"var{v}"
-        var_folder = os.path.join(variations_base, var_name)
-        desc_file = os.path.join(var_folder, f"{var_name}_description.md")
+print("📝 SCRIPT SETTINGS:")
+print(f"   Pinterest board URL: {BOARD_URL}")
+print(f"   Browser: {BROWSER}")
+print(f"   Scroll pause: {SCROLL_PAUSE_TIME}s | Max scrolls: {MAX_SCROLLS}")
+print(f"   Download pause range: {DOWNLOAD_PAUSE_TIME_RANGE}s")
+print(f"   Max retries: {MAX_RETRIES}")
+print(f"   DRY RUN: {'ON' if DRY_RUN else 'OFF'}")
+print("-" * 50)
 
-        if dry_run:
-            print(f"[DRY RUN] Would create folder: {var_folder}")
-            print(f"[DRY RUN] Would create file: {desc_file}")
-        else:
-            os.makedirs(var_folder, exist_ok=True)
-            open(desc_file, "a").close()
-            print(f"📁 Created folder: {var_folder}")
-            print(f"📝 Created file: {desc_file}")
+# -----------------------------------------------------------------------------------
+# === PREVIOUS DOWNLOAD CHECK ===
+# -----------------------------------------------------------------------------------
 
-    # 5️⃣ Log the creation:
-    log_entry = (
-        f"{datetime.now().isoformat()} | Created {folder_name} | "
-        f"Image: {image_filename} | Title: {title} | Pinterest URL: {pinterest_url}\n"
-    )
+if os.path.exists(LOG_FILE):
+    with open(LOG_FILE, 'r') as f:
+        downloaded = set(line.strip().split(',')[0] for line in f if line.strip())
+    print(f"🔎 {len(downloaded)} images found in existing log.")
+else:
+    downloaded = set()
+    print("🔎 No previous log found. Starting fresh.")
 
-    if dry_run:
-        print(f"[DRY RUN] Would write to log: {log_entry}")
+# -----------------------------------------------------------------------------------
+# === BROWSER LAUNCH ===
+# -----------------------------------------------------------------------------------
+
+print("🚀 Launching browser...")
+driver = launch_browser(BROWSER)
+driver.get(BOARD_URL)
+
+# -----------------------------------------------------------------------------------
+# === SCROLLING ===
+# -----------------------------------------------------------------------------------
+
+print(f"🔽 Scrolling {MAX_SCROLLS} times...")
+
+for scroll in range(1, MAX_SCROLLS + 1):
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+    print(f"   ⏬ Scroll {scroll}/{MAX_SCROLLS}")
+    time.sleep(SCROLL_PAUSE_TIME)
+
+print("✅ Scrolling complete. Gathering images...")
+
+# -----------------------------------------------------------------------------------
+# === COLLECT IMAGES & TITLES ===
+# -----------------------------------------------------------------------------------
+
+images = driver.find_elements(By.TAG_NAME, 'img')
+img_data = []
+
+for img in images:
+    src = img.get_attribute('src')
+    alt = img.get_attribute('alt') or img.get_attribute('aria-label') or "Pinterest_Image"
+
+    if src and 'pinimg.com' in src:
+        hi_res_src = re.sub(r'/\d+x/', '/originals/', src)
+        img_data.append((hi_res_src, alt))
+
+print(f"🔍 Found {len(img_data)} potential images.")
+print("-" * 50)
+
+# -----------------------------------------------------------------------------------
+# === DOWNLOAD & ORGANIZE IMAGES ===
+# -----------------------------------------------------------------------------------
+
+new_downloads = 0
+log_file = open(LOG_FILE, 'a') if not DRY_RUN else None
+
+for idx, (img_url, title) in enumerate(tqdm(img_data, desc="Processing images", unit="image")):
+
+    if img_url in downloaded:
+        tqdm.write(f"   🔁 Skipping already downloaded image {idx + 1}")
+        continue
+
+    filename = sanitize_filename(title) or f"image_{idx + 1}"
+    image_filename = f"{filename}.jpg"
+    full_image_path = os.path.join(IMAGE_FOLDER, image_filename)
+
+    if DRY_RUN:
+        tqdm.write(f"[DRY RUN] Would download image: {image_filename}")
     else:
-        os.makedirs(os.path.dirname(LOG_PATH), exist_ok=True)
-        with open(LOG_PATH, "a") as log_file:
+        attempt = 0
+        success = False
+
+        while attempt < MAX_RETRIES and not success:
+            try:
+                tqdm.write(f"📥 Downloading {filename} (attempt {attempt + 1})")
+                response = requests.get(img_url, timeout=15)
+                img_data_bytes = response.content
+
+                os.makedirs(IMAGE_FOLDER, exist_ok=True)
+
+                with open(full_image_path, 'wb') as f:
+                    f.write(img_data_bytes)
+
+                success = True
+
+            except Exception as e:
+                tqdm.write(f"⚠️ Failed attempt {attempt + 1} for {img_url}: {e}")
+                attempt += 1
+
+        if not success:
+            tqdm.write(f"❌ Skipped after {MAX_RETRIES} failed attempts.")
+            continue
+
+        # --- CALL THE FOLDER BUILDER ---
+        tqdm.write(f"🔧 Creating inspo folder and linking image...")
+        inspo_folder = create_inspo_folder(
+            image_filename=image_filename,
+            title=title,
+            pinterest_url=img_url,
+            dry_run=DRY_RUN
+        )
+
+        # --- LOG THIS DOWNLOAD ---
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        log_entry = f"{img_url},{image_filename},{inspo_folder},{timestamp}\n"
+
+        if DRY_RUN:
+            tqdm.write(f"[DRY RUN] Would log: {log_entry}")
+        else:
             log_file.write(log_entry)
-        print(f"🗒 Logged action to: {LOG_PATH}")
+            log_file.flush()
 
-    print(f"✅ inspo folder {folder_name} created successfully.")
-    return folder_name
+        new_downloads += 1
 
-# -----------------------------------------------------------------------------------
-# === CLI SUPPORT ===
-# -----------------------------------------------------------------------------------
+        pause = random.uniform(*DOWNLOAD_PAUSE_TIME_RANGE)
+        tqdm.write(f"   ⏳ Waiting {pause:.2f}s before next download...")
+        time.sleep(pause)
 
-if __name__ == "__main__":
-    import argparse
+if log_file:
+    log_file.close()
 
-    parser = argparse.ArgumentParser(
-        description="📂 MidJourney Inspo Folder Builder v1.0 - Notes & Media Split Edition"
-    )
-    parser.add_argument(
-        "--image", type=str, required=True,
-        help="Filename of the image already in the Inspo image folder"
-    )
-    parser.add_argument("--title", type=str, default="Untitled", help="Title for the inspo")
-    parser.add_argument("--url", type=str, default="N/A", help="Pinterest URL")
-    parser.add_argument(
-        "--dry-run", action="store_true",
-        help="Preview actions without making changes"
-    )
+driver.quit()
 
-    args = parser.parse_args()
-
-    create_inspo_folder(
-        image_filename=args.image,
-        title=args.title,
-        pinterest_url=args.url,
-        dry_run=args.dry_run
-    )
+print("-" * 50)
+if DRY_RUN:
+    print("✅ DRY RUN complete. No images downloaded or folders created.")
+else:
+    print(f"🎉 Downloaded and organized {new_downloads} new images into inspo folders.")
 
 # -----------------------------------------------------------------------------------
 # === END OF SCRIPT ===
