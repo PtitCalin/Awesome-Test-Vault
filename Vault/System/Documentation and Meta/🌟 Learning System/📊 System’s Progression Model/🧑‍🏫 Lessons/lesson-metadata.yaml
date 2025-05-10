@@ -2,13 +2,30 @@ id: lesson-XXXX
 title: ""
 type: lesson
 version: 1.0
-status: coming-soon # options: coming-soon, in-progress, published
+status: active 
+# options: active, planned, completed, archived
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
-tags: [lesson, #knowledge, #skilltree]
-difficulty: beginner # options: beginner, intermediate, advanced
-skill_tree: ""
+tags: [lesson, knowledge]
+parent_item: ""
+children_items: []
+
+required_quests: []
+required_lessons: []
+required_badges: []
+required_nuggets: []
+required_skills: []
+required_items: []
+lesson-status: active
+# options: locked, blocked, in-progress, active, completed, archived
+difficulty: beginner 
+# options: beginner, intermediate, advanced
+skill_tree: []
 related_quests: []
+related_quizzes: []
+previous_lesson: []
+next_lesson: []
+related_lessons: []
 summary: ""
 objectives:
   - ""

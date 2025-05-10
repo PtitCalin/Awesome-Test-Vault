@@ -1,15 +1,24 @@
 id: quest-XXXX
 title: ""
 type: quest
-version: 1.2
-status: active # options: active, planned, completed, archived
-priority: medium # options: low, medium, high
+version: 1.0
+status: active 
+# options: active, planned, completed, archived
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
-tags: [quest, #tag1, #tag2]
-assigned_to: Charlie
+tags: [quest, tag1, tag2 ]
 related: []
 parent: ""
+children: []
+
+required_quests: []
+required_lessons: []
+required_badges: []
+required_nuggets: []
+required_skills: []
+required_items: []
+quest-status: active
+# options: locked, blocked, in-progress, active, completed, archived
 rewards:
   - XP: 20
   - Nugget: Bash Nugget
