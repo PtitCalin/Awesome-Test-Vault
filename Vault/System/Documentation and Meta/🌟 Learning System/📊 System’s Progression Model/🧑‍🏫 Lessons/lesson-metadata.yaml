@@ -1,0 +1,15 @@
+id: lesson-XXXX
+title: ""
+type: lesson
+version: 1.0
+status: coming-soon # options: coming-soon, in-progress, published
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
+tags: [lesson, #knowledge, #skilltree]
+difficulty: beginner # options: beginner, intermediate, advanced
+skill_tree: ""
+related_quests: []
+summary: ""
+objectives:
+  - ""
+  - ""

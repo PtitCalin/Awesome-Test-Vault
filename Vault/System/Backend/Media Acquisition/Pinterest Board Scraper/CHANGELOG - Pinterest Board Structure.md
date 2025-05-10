@@ -27,27 +27,4 @@ All notable changes to this project are documented here.
 - Added tqdm progress bar.
 - Retained resume, dry run, random delays, and timestamped logs.
 
----
 
-## v3.0 — Enhanced Script
-
-- Added resume feature and download log.
-- Skips already downloaded images.
-- Improved echoes and narration.
-
----
-
-## v2.0 — Safe Functional Script
-
-- Introduced dry run mode for safe testing.
-- Enhanced self-instructive code and startup summaries.
-
----
-
-## v1.0 — Basic Functional Script
-
-- Basic auto-scrolling.
-- Image URL extraction.
-- Downloaded images with adjustable pauses.
-
----

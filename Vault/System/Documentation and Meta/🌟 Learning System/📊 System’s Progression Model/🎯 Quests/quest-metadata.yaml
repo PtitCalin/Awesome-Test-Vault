@@ -1,0 +1,19 @@
+id: quest-XXXX
+title: ""
+type: quest
+version: 1.2
+status: active # options: active, planned, completed, archived
+priority: medium # options: low, medium, high
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
+tags: [quest, #tag1, #tag2]
+assigned_to: Charlie
+related: []
+parent: ""
+rewards:
+  - XP: 20
+  - Nugget: Bash Nugget
+  - Unlocks: [next_quest_id]
+questline: ""
+skill_tree: ""
+summary: ""
